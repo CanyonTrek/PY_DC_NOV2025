@@ -7,14 +7,20 @@
 """
 import random
 
-lotto = [] # Create Empty list
+# lotto = [] # Create Empty list
+
+# while len(lotto) < 6:
+#    num = random.randint(1, 50)
+#    if num not in lotto:
+#       lotto.append(num)
+#    else:
+#        print("Duplicate number =", num)
+
+lotto = set()
 
 while len(lotto) < 6:
     num = random.randint(1, 50)
-    if num not in lotto:
-        lotto.append(num)
-    else:
-        print("Duplicate number =", num)
+    lotto.add(num)
 
 
-print("Lottery numbers =", lotto)
+print("Lottery numbers =", sorted(lotto, key=int, reverse=True))
