@@ -5,26 +5,17 @@
 """ 
     Tank Class
 """
+from app import vehicle
 
-class Tank:
+class Tank(vehicle.Vehicle):
     # Class has 2 components - Attribute/Data + Behaviour/Methods
     def __init__(self, country, model):
-        self.country = country
-        self.model = model
-        self._speed = 0
+        vehicle.Vehicle.__init__(self, country, model)
         self._direction = 0
         self._location = {"x": 0, "y": 0, "z": 0}
         self._shells = 20
         self._health = 100
         # No Explicit return as its called implicitly
-
-    def accel(self, increase):
-        self._speed += increase
-        return None
-
-    def decel(self, decrease):
-        self._speed -= decrease
-        return None
 
     def rotate_left(self, degrees):
         self._direction -= degrees % 360
@@ -41,3 +32,16 @@ class Tank:
     def take_damage(self, damage):
         self._health -= damage
 
+    # Some SPECIAL methods..
+    def __add__(self, other):
+        return self._health + other._health
+
+    # Example of a GETTER and a SETTER
+    def get_health(self):
+        return self._health
+
+    def set_health(self, newhealth):
+        self._health = newhealth
+        return None
+
+    tank_health = property(get_health, set_health)
